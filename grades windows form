@@ -1,0 +1,33 @@
+using System;
+using System.Windows.Forms;
+namespace Grades
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            double firstGrade, secondGrade, thirdGrade, fourthGrade;
+
+            if (double.TryParse(txtFirstQuarter.Text, out firstGrade) &&
+                double.TryParse(txtSecondQuarter.Text, out secondGrade) &&
+                double.TryParse(txtThirdQuarter.Text, out thirdGrade) &&
+                double.TryParse(txtFourthQuarter.Text, out fourthGrade))
+            {
+                double gradeSum = firstGrade + secondGrade + thirdGrade + fourthGrade;
+                double gradeAverage = gradeSum / 4;
+
+                lblGradeSum.Text = "Grade Sum: " + gradeSum.ToString();
+                lblAverageRemarks.Text = "Average / Remarks: " + gradeAverage.ToString("F2") + " / " + (gradeAverage >= 75 ? "Passed" : "Fail");
+            }
+            else
+            {
+                MessageBox.Show("Please enter valid numeric grades for all quarters.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+    }
+}
